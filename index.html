@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoCart – Sustainable Shopping Made Simple</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0F62FE",
+              secondary: "#393939",
+              tertiary: "#F4F4F4",
+              hariyo: "#7CFC00",
+              hariyo2: "#7FFF00",
+              seto: "#E1EEBC",
+              eco_primary: "hsl(120 60% 45%)",
+              eco_light: "hsl(120 50% 75%)",
+              eco_dark: "hsl(120 70% 25%)",
+              eco_gradient_start: "hsl(120 50% 75%)",
+              eco_gradient_end: "hsl(120 60% 45%)",
+              dark_base: "#1A1A1A" /*For headers, nav bar, and product titles*/,
+              light_base: "#A2D5C6",
+              accent: "#B7F800" /*For hover effects, badges, buttons*/,
+              alert: "#FF4C4C",
+              neutral: "#C5C6C7" /*Secondary text, dividers*/,
+            },
+            animation: {
+              "accordion-down": "accordion-down 0.2s ease-out",
+              "accordion-up": "accordion-up 0.2s ease-out",
+              "fade-in": "fade-in 0.6s ease-out",
+              "slide-in-left": "slide-in-left 0.6s ease-out",
+              "slide-in-right": "slide-in-right 0.6s ease-out",
+              "scale-in": "scale-in 0.5s ease-out",
+              "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
+            },
+            keyframes: {
+              "accordion-down": {
+                from: {
+                  height: "0",
+                },
+                to: {
+                  height: "var(--radix-accordion-content-height)",
+                },
+              },
+              "accordion-up": {
+                from: {
+                  height: "var(--radix-accordion-content-height)",
+                },
+                to: {
+                  height: "0",
+                },
+              },
+              "fade-in": {
+                "0%": {
+                  opacity: "0",
+                  transform: "translateY(20px)",
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "translateY(0)",
+                },
+              },
+              "slide-in-left": {
+                "0%": {
+                  opacity: "0",
+                  transform: "translateX(-30px)",
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "translateX(0)",
+                },
+              },
+              "slide-in-right": {
+                "0%": {
+                  opacity: "0",
+                  transform: "translateX(30px)",
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "translateX(0)",
+                },
+              },
+              "scale-in": {
+                "0%": {
+                  opacity: "0",
+                  transform: "scale(0.9)",
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "scale(1)",
+                },
+              },
+              "bounce-gentle": {
+                "0%, 100%": {
+                  transform: "translateY(0)",
+                },
+                "50%": {
+                  transform: "translateY(-10px)",
+                },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="shortcut icon" href="/Logos/favicon.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <header class="shadow sticky top-0 z-50 bg-white">
+      <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center">
+          <a href="#">
+            <div class="flex items-center justify-start font-medium w-40 gap-1">
+              <img src="./assets/images/logoo.png" alt="" class="w-10" />
+              <span class="text-secondary text-lg md:text-xl">Eco</span>
+              <span class="text-hariyo text-lg md:text-xl">Cart</span>
+              <img src="Logos/logoo.png" alt="" class="w-10" />
+            </div>
+          </a>
+          <nav class="hidden md:flex gap-7">
+            <a
+              href="#home"
+              class="hover:text-hariyo transition-colors duration-300"
+              >Home</a
+            >
+            <a href="#products" class="hover:text-hariyo transition"
+              >Products</a
+            >
+            <a
+              href="#popular"
+              class="hover:text-hariyo transition-colors duration-300"
+              >Fashion</a
+            >
+            <a href="#categories" class="hover:text-hariyo transition"
+              >Categories</a
+            >
+            <a
+              href="#testimonials"
+              class="hover:text-hariyo transition-colors duration-300"
+              >Testimonials</a
+            >
+          </nav>
+
+          <div class="flex items-center">
+            <i
+              class="fa-solid fa-cart-shopping hover:bg-gray-200 p-2 rounded transition duration-300 text-hariyo2"
+            ></i>
+
+            <button
+              class="text-sm border-2 border-hariyo2 text-eco_primary px-4 py-1 rounded-full hover:bg-hariyo2 hover:text-white transition-colors dureation-300 ml-4"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section
+        id="home"
+        class="py-16 md:py-24 bg-gradient-to-r from-green-300 to-eco_dark"
+      >
+        <div class="container mx-auto px-4">
+          <div
+            class="flex flex-col md:flex-row items-center md:justify-between"
+          >
+            <!-- content -->
+            <div class="md:w-1/2 mb-10 animate-slide-in-left">
+              <h1
+                class="text-4xl text-white font-bold md:text-5xl lg:text-6xl mb-4 leading-tight"
+              >
+                Shop Sustainably, Live Consciously
+              </h1>
+              <p class="text-lg text-white animate-fade-in delay-[0.3s,250ms]">
+                Discover eco-friendly products that fit your lifestyle. From
+                fashion to daily essentials — all made with care for the planet.
+              </p>
+              <div
+                class="py-5 flex flex-col md:flex-row gap-3 delay-[0.6s,250ms]"
+              >
+                <a
+                  href="#"
+                  class="font-medium text-secondary/80 px-6 py-3 rounded-lg bg-white text-center hover:bg-zinc-200 hover:scale-105 shadow-xl transition duration-300"
+                  >Shop Now</a
+                >
+                <a
+                  href="#"
+                  class="font-medium border-2 border-white text-white px-6 py-3 rounded-lg hover:shadow-xl text-center hover:scale-105 transition duration-300"
+                  >Learn More</a
+                >
+              </div>
+            </div>
+            <!-- image -->
+            <div
+              class="md:w-1/2 md:mb-0 flex justify-center animate-slide-in-right"
+            >
+              <img
+                src="assets/images/laptop.png"
+                class="max-w-full h-auto rounded-xl shadow-xl w-3/4 lg:w-3/4 hover:scale-105 transition duration-300"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why choose EcoCart? -->
+      <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+          <div class="mb-10 animate-fade-in">
+            <h2 class="text-3xl font-bold text-center mb-4">
+              Why choose EcoCart?
+            </h2>
+            <p class="text-gray-600 text-center">
+              Join thousands of conscious consumers making a positive impact on
+              our planet
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+          >
+            <div
+              class="bg-slate-100 py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+            >
+              <div
+                class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <i
+                  class="fa-solid fa-leaf group-hover:animate-bounce-gentle"
+                ></i>
+              </div>
+              <h3 class="font-semibold text-xl mb-2 text-center">
+                100% Eco-Friendly
+              </h3>
+              <p class="text-gray-600 text-center">
+                All our products are sustainably sourced and environmentally
+                conscious.
+              </p>
+            </div>
+
+            <div
+              class="bg-slate-100 py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+            >
+              <div
+                class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <i
+                  class="fa-solid fa-recycle group-hover:animate-bounce-gentle"
+                ></i>
+              </div>
+              <h3 class="font-semibold text-xl mb-2 text-center">
+                Zero Waste Packaging
+              </h3>
+              <p class="text-gray-600 text-center">
+                Biodegradable and recyclable packaging for every order.
+              </p>
+            </div>
+
+            <div
+              class="bg-slate-100 py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+            >
+              <div
+                class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <i
+                  class="fa-regular fa-heart group-hover:animate-bounce-gentle"
+                ></i>
+              </div>
+              <h3 class="font-semibold text-xl mb-2 text-center">
+                Ethically Made
+              </h3>
+              <p class="text-gray-600 text-center">
+                Supporting fair trade and ethical manufacturing practices
+                worldwide.
+              </p>
+            </div>
+
+            <div
+              class="bg-slate-100 py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+            >
+              <div
+                class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+              >
+                <i
+                  class="fa-solid fa-shield group-hover:animate-bounce-gentle"
+                ></i>
+              </div>
+              <h3 class="font-semibold text-xl text-center mb-2">
+                100% Eco-Friendly
+              </h3>
+              <p class="text-gray-600 text-center">
+                All our products are sustainably sourced and environmentally
+                conscious.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Products Section -->
+      <section class="py-16 bg-slate-100" id="products">
+        <div class="container mx-auto px-4 mb-10">
+          <div class="mb-10">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+              Featured Products
+            </h2>
+            <p class="text-gray-600 text-center">
+              Discover our most popular eco-friendly products loved by customers
+              worldwide
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/airpods max.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">AirPods Max</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$49.99</span>
+                  <span class="line-through text-gray-600 text-sm">$59.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/cotton t-shirt.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Cotton T-Shirt</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$2.99</span>
+                  <span class="line-through text-gray-600 text-sm">$3.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/galaxy z flip.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Samsung Galaxy Z Flip 5</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$1500</span>
+                  <span class="line-through text-gray-600 text-sm">$1750</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/iphone 16.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">iPhone 16</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1"
+                    >$799.99</span
+                  >
+                  <span class="line-through text-gray-600 text-sm"
+                    >$899.99</span
+                  >
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/jeans.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Denim Jeans</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$4.99</span>
+                  <span class="line-through text-gray-600 text-sm">$5.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/powerbank.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">OnePlus PowerBank</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$39.99</span>
+                  <span class="line-through text-gray-600 text-sm">$49.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/water bottle.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-2 left-2 bg-red-500 text-white rounded-full text-sm py-1 px-2"
+                  >-10%</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Water Bottle</h3>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$10.99</span>
+                  <span class="line-through text-gray-600 text-sm">$11.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <a
+            href="#"
+            class="font-medium border-2 border-eco_primary text-eco_primary p-3 rounded-lg hover:bg-eco_primary hover:text-white text-center transition-colors"
+            >View All Products</a
+          >
+        </div>
+      </section>
+
+      <!-- Regiter Here Section -->
+      <section class="py-16 relative">
+        <img
+          src="/src/assets/images/registration-bg.jpg"
+          alt=""
+          class="h-full w-full object-cover absolute top-0 -z-20"
+        />
+
+        <div
+          class="absolute top-0 left-0 h-full w-full bg-black opacity-60 -z-10"
+        ></div>
+        <div class="container mx-auto px-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="flex flex-col justify-center">
+              <h2
+                class="text-3xl md:text-6xl font-bold mb-4 text-white uppercase tracking-[0.25rem]"
+              >
+                Join EcoCart Today!
+              </h2>
+
+              <p class="text-gray-300">
+                Discover a world of eco-friendly products and services that help
+                you live a more sustainable lifestyle.
+              </p>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl px-8 py-10 mx-auto shadow-md lg:w-3/4 shadow-gray-600 hover:shadow-lg transition duration-300"
+            >
+              <h3 class="text-3xl font-bold mb-4 text-center">Contact Here</h3>
+
+              <form>
+                <div class="pb-2">
+                  <label for="name">Full Name</label>
+                  <input
+                    type="text"
+                    name=""
+                    id="name"
+                    required
+                    placeholder="Enter your full name"
+                    class="w-full rounded-lg border-2 border-zinc-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-400 mt-1"
+                  />
+                </div>
+                <div class="pb-2">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="text"
+                    name=""
+                    id="email"
+                    required
+                    placeholder="Your Email Address"
+                    class="w-full rounded-lg border-2 border-zinc-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-400 mt-1"
+                  />
+                </div>
+                <div class="pb-2">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    name=""
+                    id="phone"
+                    required
+                    placeholder="Your Phone Number"
+                    class="w-full rounded-lg border-2 border-zinc-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-400 mt-1"
+                  />
+                </div>
+                <div class="pb-2">
+                  <label for="message">Message</label>
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    id="message"
+                    required
+                    class="w-full rounded-lg border-2 border-zinc-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-400 mt-1"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="bg-eco_primary text-white w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Submit <i class="fa fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popular Products Section -->
+      <section class="py-16 bg-white" id="popular">
+        <div class="container mx-auto px-4">
+          <div class="mb-10">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+              Popular Products
+            </h2>
+            <p class="text-gray-600 text-center">
+              Discover our most popular eco-friendly products loved by customers
+              worldwide
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/galaxy z flip.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-3 right-3 bg-red-500 text-white rounded-full text-sm px-3 py-1"
+                  >Bestseller</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Samsung Galaxy Fold 7</h3>
+
+                <p class="text-gray-500 text-sm py-2">
+                  One of the best selling phone in the world by Samsung
+                </p>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1"
+                    >$1499.99</span
+                  >
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/airpods max.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-3 right-3 bg-red-500 text-white rounded-full text-sm px-3 py-1"
+                  >Trending</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Apple Airpods Max</h3>
+
+                <p class="text-gray-500 text-sm py-2">
+                  One of the best selling headphone in the world by Apple
+                </p>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1"
+                    >$499.99</span
+                  >
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/cotton t-shirt.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-3 right-3 bg-red-500 text-white rounded-full text-sm px-3 py-1"
+                  >Bestseller</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Cotton Tees</h3>
+
+                <p class="text-gray-500 text-sm py-2">
+                  One of the best selling tees in the world by EcoCart
+                </p>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1">$1.99</span>
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-lg shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group animate-slide-in-right overflow-hidden delay-[0.2s, 250ms]"
+            >
+              <div class="relative">
+                <img
+                  src="./assets/images/products/iphone 16.jpg"
+                  class="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 group-hover:scale-105"
+                  alt=""
+                />
+                <span
+                  class="absolute top-3 right-3 bg-red-500 text-white rounded-full text-sm px-3 py-1"
+                  >Bestseller</span
+                >
+              </div>
+
+              <div class="p-4">
+                <h3 class="text-xl font-semibold">Apple iPhone 16</h3>
+
+                <p class="text-gray-500 text-sm py-2">
+                  One of the best selling phone in the world by Apple
+                </p>
+
+                <div class="text-yellow-600 text-xs py-2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+
+                  <span class="text-gray-500 ml-1">(4.5)</span>
+                </div>
+
+                <div>
+                  <span class="text-hariyo font-bold text-lg mr-1"
+                    >$799.99</span
+                  >
+                </div>
+
+                <button
+                  class="bg-eco_primary text-white transition w-full p-2 rounded-lg hover:bg-eco_dark transition mt-3"
+                >
+                  Add to Cart <i class="fa fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action Section -->
+      <section class="py-16 bg-black/50">
+        <div class="container mx-auto px-4">
+          <div class="mb-10">
+            <h2 class="text-4xl font-bold mb-4 text-center text-white">
+              Stay Updated on Sustainable Living
+            </h2>
+            <p class="text-white text-center">
+              Get the latest eco-friendly products, sustainability tips, and
+              exclusive offers delivered to your inbox.
+            </p>
+          </div>
+
+          <form
+            action="#"
+            class="flex flex-col md:flex-row gap-3 justify-center"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              id="email"
+              class="px-3 py-2 rounded-lg text-zinc-800 lg:w-1/3 focus:outline-none focus:ring-2 focus:ring-green-500 hover:shadow-lg transition duration-300"
+            />
+            <button
+              type="submit"
+              class="px-3 py-2 rounded-lg text-green-500 font-medium bg-white hover:bg-gray-200 transition duration-300 hover:shadow-lg"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="py-16 bg-slate-100" id="categories">
+        <div class="container mx-auto px-4">
+          <div class="mb-10">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+              Shop by Category
+            </h2>
+            <p class="text-gray-600 text-center">
+              Explore our carefully curated collection of sustainable products
+              across different categories
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5"
+          >
+            <a href="">
+              <div
+                class="bg-white py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+              >
+                <div
+                  class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+                >
+                  <span class="bg-slate-200 p-5 rounded-full inline-block">
+                    <i
+                      class="fa-solid fa-laptop group-hover:animate-bounce-gentle"
+                    ></i>
+                  </span>
+                </div>
+                <h3 class="font-semibold text-xl mb-2 text-center">
+                  Laptops & PC
+                </h3>
+                <p class="text-gray-600 text-center">25 Products</p>
+              </div>
+            </a>
+
+            <a href=""
+              ><div
+                class="bg-white py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+              >
+                <div
+                  class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+                >
+                  <span class="bg-slate-200 p-5 rounded-full inline-block">
+                    <i
+                      class="fa-solid fa-shopping-bag group-hover:animate-bounce-gentle"
+                    ></i>
+                  </span>
+                </div>
+                <h3 class="font-semibold text-xl mb-2 text-center">
+                  Cosmetics & Fashion
+                </h3>
+                <p class="text-gray-600 text-center">25 Products</p>
+              </div></a
+            >
+
+            <a href="">
+              <div
+                class="bg-white py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+              >
+                <div
+                  class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+                >
+                  <span class="bg-slate-200 p-5 rounded-full inline-block">
+                    <i
+                      class="fa-solid fa-cutlery group-hover:animate-bounce-gentle"
+                    ></i>
+                  </span>
+                </div>
+                <h3 class="font-semibold text-xl mb-2 text-center">
+                  Groceries
+                </h3>
+                <p class="text-gray-600 text-center">25 Products</p>
+              </div>
+            </a>
+
+            <a href="">
+              <div
+                class="bg-white py-5 px-7 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300 border-border group animate-scale-in delay-[0.2s, 250ms]"
+              >
+                <div
+                  class="text-4xl mb-3 text-hariyo p-2 text-center group-hover:scale-110 transition-transform duration-300"
+                >
+                  <span class="bg-slate-200 p-5 rounded-full inline-block">
+                    <i
+                      class="fa-solid fa-cube group-hover:animate-bounce-gentle"
+                    ></i>
+                  </span>
+                </div>
+                <h3 class="font-semibold text-xl mb-2 text-center">
+                  Miscellenous
+                </h3>
+                <p class="text-gray-600 text-center">25 Products</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="py-16 bg-white" id="testimonials">
+        <div class="container mx-auto px-4">
+          <div class="mb-10">
+            <h2 class="text-3xl font-bold mb-4 text-center">
+              What Our Customers Say
+            </h2>
+            <p class="text-gray-600 text-center">
+              Join thousands of happy customers who are making a difference with
+              every purchase
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-slate-100 rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300"
+            >
+              <div class="text-xl text-slate-500">
+                <i class="fa fa-quote-right"></i>
+              </div>
+
+              <p class="text-sm text-slate-600">
+                I love knowing that every purchase I make through Eco Cart is
+                helping the environment. The quality is amazing and shipping is
+                fast!
+              </p>
+
+              <div class="text-yellow-500 text-sm py-3">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <img
+                  src="/src/assets/customers/user.png"
+                  alt=""
+                  class="w-12 h-12 rounded-full object-cover border border-slate-300"
+                />
+                <div>
+                  <h4 class="font-semibold">Sneha Udas</h4>
+                  <p class="text-xs text-slate-600">Dharan, Nepal</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-100 rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300"
+            >
+              <div class="text-xl text-slate-500">
+                <i class="fa fa-quote-right"></i>
+              </div>
+              <p class="text-sm text-slate-600">
+                Finally, a marketplace that aligns with my values. The product
+                selection is incredible and customer service is top-notch
+              </p>
+
+              <div class="text-yellow-500 text-sm py-3">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <img
+                  src="/src/assets/customers/user.png"
+                  alt=""
+                  class="w-12 h-12 rounded-full object-cover border border-slate-300"
+                />
+                <div>
+                  <h4 class="font-semibold">Ardev Bajracharya</h4>
+                  <p class="text-xs text-slate-600">Dharan, Nepal</p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-100 rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300"
+            >
+              <div class="text-xl text-slate-500">
+                <i class="fa fa-quote-right"></i>
+              </div>
+              <p class="text-sm text-slate-600">
+                Eco Cart has completely changed how I shop. I feel good about
+                every purchase knowing it's sustainable and ethical.
+              </p>
+
+              <div class="text-yellow-500 text-sm py-3">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <img
+                  src="/src/assets/customers/user.png"
+                  alt=""
+                  class="w-12 h-12 rounded-full object-cover border border-slate-300"
+                />
+                <div>
+                  <h4 class="font-semibold">Anonymous User</h4>
+                  <p class="text-xs text-slate-600">Dharan, Nepal</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-16 bg-slate-800">
+      <div class="container mx-auto px-4">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 border-b pb-16 mb-5 border-b-slate-700"
+        >
+          <div>
+            <h1 class="font-bold text-2xl text-white">
+              Eco <span class="text-green-500">Cart</span>
+            </h1>
+            <p class="text-sm text-slate-400">
+              Your trusted marketplace for sustainable and eco-friendly
+              products. Making conscious living accessible to everyone.
+            </p>
+
+            <div class="flex items-center gap-3 py-2">
+              <a
+                href=""
+                class="text-white hover:text-green-400 transition duration-300"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a
+                href=""
+                class="text-white hover:text-green-400 transition duration-300"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a
+                href=""
+                class="text-white hover:text-green-400 transition duration-300"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white mb-3">Shop</h3>
+
+            <ul>
+              <li>
+                <a
+                  href="#"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#products"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300hover:text-green-400 transition duration-300"
+                  >Products</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#categories"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >Categories</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#popular"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >Popular Products</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#testimonials"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >Testimonials</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white mb-3">We Accept</h3>
+
+            <div class="flex items-start gap-3 flex-col">
+              <img
+                src="/src/assets/payments/esewa.png"
+                alt=""
+                class="w-auto h-12 bg-white rounded px-5 py-2"
+              />
+              <img
+                src="/src/assets/payments/khalti.png"
+                alt=""
+                class="w-auto h-12 bg-white rounded px-5 py-2"
+              />
+              <img
+                src="/src/assets/payments/fonepay.png"
+                alt=""
+                class="w-auto h-12 bg-white rounded px-5 py-2"
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-lg font-bold text-white mb-3">Contact Us</h3>
+
+            <ul>
+              <li>
+                <i class="fa fa-envelope text-green-400 text-sm"></i>
+                <a
+                  href="mailto:contact@ecocart.com"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >contact@ecocart.com</a
+                >
+              </li>
+              <li>
+                <i class="fa fa-phone text-green-400 text-sm"></i>
+                <a
+                  href="tel:+977-123456789"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >+977-123456789</a
+                >
+              </li>
+              <li>
+                <i class="fa fa-map-marker-alt text-green-400 text-sm"></i>
+                <a
+                  href="https://goo.gl/maps/xyz"
+                  class="text-sm text-slate-400 hover:text-green-400 transition duration-300"
+                  >123 Eco Street, Kathmandu, Nepal</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <p
+            class="text-sm text-slate-400 hover:text-green-400 transition duration-300 hover:underline"
+          >
+            Copyright © 2025 Eco Cart. All rights reserved.
+          </p>
+
+          <div>
+            <p
+              class="text-sm text-slate-400 hover:text-green-400 transition duration-300 hover:underline"
+            >
+              Privacy Policy
+            </p>
+          </div>
+
+          <div>
+            <p
+              class="text-sm text-slate-400 hover:text-green-400 transition duration-300 hover:underline"
+            >
+              Terms of Service
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <img
+      src="assets/images/parallex.jpg"
+      alt=""
+      class="h-svh w-full object-cover fixed top-0 left-0 -z-50"
+    />
+  </body>
+</html>

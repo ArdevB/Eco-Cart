@@ -1,0 +1,8 @@
+{
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "text": "Generate concsise Git commit message starting with an emoji for the commit type (⚡ feat, 🐛 fix, 📝 docs, 🎨 style, ♻️ refactor, 🚀 perf, ✅ test, 🔧 chore, ⬆️ deps). Use lowercase type after emoji (e.g., ⚡ feat: add new feature) and keep the message short and clear."
+    }
+  ],
+  "editor.formatOnSave": true
+}

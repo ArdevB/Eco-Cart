@@ -1,0 +1,44 @@
+[
+  {
+    "brand": "Apple",
+    "category": "Smartphones",
+    "id": "1",
+    "name": "iPhone 13",
+    "price": 799
+  },
+  {
+    "brand": "Samsung",
+    "category": "Smartphones",
+    "id": "2",
+    "name": "Galaxy S21",
+    "price": 699
+  },
+  {
+    "brand": "Sony",
+    "category": "Headphones",
+    "id": "3",
+    "name": "WH-1000XM4",
+    "price": 349
+  },
+  {
+    "brand": "Dell",
+    "category": "Laptops",
+    "id": "4",
+    "name": "XPS 13",
+    "price": 999
+  },
+  {
+    "brand": "Apple",
+    "category": "Laptops",
+    "id": "5",
+    "name": "MacBook Air",
+    "price": 999
+  },
+  {
+    "brand": "Google",
+    "category": "Smartphones",
+    "id": "6",
+    "name": "Pixel 6",
+    "price": 599
+  }
+]

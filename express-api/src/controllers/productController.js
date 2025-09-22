@@ -1,7 +1,7 @@
 import fs from "fs";
 import productService from "../services/productService.js";
 const getProducts = (req, res) => {
-  const products = productService.getAllProducts();
+  const products = productService.getProducts();
 
   res.status(200).json(products);
 };

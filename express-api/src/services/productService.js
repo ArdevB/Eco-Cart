@@ -10,6 +10,4 @@ const getProducts = (req, res) => {
   res.status(200).json(filteredProducts);
 };
 
-export default {
-  getProducts,
-};
+export default { getProducts };

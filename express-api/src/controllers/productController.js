@@ -11,7 +11,9 @@ const createProduct = (req, res) => {
 };
 
 const createProductById = (req, res) => {
-  res.send("One Product");
+  const product = productService.getProductById(id);
+
+  res.json(product);
 };
 
 const updateProduct = (req, res) => {

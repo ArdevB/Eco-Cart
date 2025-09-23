@@ -10,4 +10,9 @@ const getProducts = (req, res) => {
   res.status(200).json(filteredProducts);
 };
 
-export default { getProducts };
+const getProductById = (id) => {
+  const foundProduct = product.find((product) => product.id == id);
+  return foundProduct;
+};
+
+export default { getProducts, getProductById };

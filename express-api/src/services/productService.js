@@ -1,18 +1,16 @@
 import fs from "fs";
 
-const getProducts = (req, res) => {
-  const rawData = fs.readFileSync("./src/data/products.json");
+const rawData = fs.readFileSync("./src/data/products.json", "utf-8");
 
-  const products = JSON.parse(rawData);
-
+const products = JSON.parse(rawData);
+const getProducts = () => {
   const filteredProducts = products.filter((product) => product.price > 500);
-
-  res.status(200).json(filteredProducts);
+  return filteredProducts;
 };
 
 const getProductById = (id) => {
-  const foundProduct = product.find((product) => product.id == id);
-  return foundProduct;
+  const productFound = products.find((products) => products.id === id);
+  return productFound;
 };
 
 export default { getProducts, getProductById };

@@ -1,4 +1,3 @@
-import fs from "fs";
 import productService from "../services/productService.js";
 const getProducts = (req, res) => {
   const products = productService.getProducts();
@@ -6,14 +5,16 @@ const getProducts = (req, res) => {
   res.status(200).json(products);
 };
 
-const createProduct = (req, res) => {
-  res.send("Created a Product");
-};
-
-const createProductById = (req, res) => {
+const getProductById = (req, res) => {
+  //Request Params
+  const id = req.params.id;
   const product = productService.getProductById(id);
 
   res.json(product);
+};
+
+const createProduct = (req, res) => {
+  res.send("Created a Product");
 };
 
 const updateProduct = (req, res) => {
@@ -27,7 +28,7 @@ const deleteProduct = (req, res) => {
 export default {
   getProducts,
   createProduct,
-  createProductById,
+  getProductById,
   updateProduct,
   deleteProduct,
 };

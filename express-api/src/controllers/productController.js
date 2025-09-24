@@ -1,6 +1,7 @@
 import productService from "../services/productService.js";
 const getProducts = (req, res) => {
-  const products = productService.getProducts();
+  //Request Query
+  const products = productService.getProducts(req.query);
 
   res.status(200).json(products);
 };
@@ -14,7 +15,9 @@ const getProductById = (req, res) => {
 };
 
 const createProduct = (req, res) => {
-  res.send("Created a Product");
+  productService.createProduct(req.body);
+
+  res.status(201).send("Product created successfully..!");
 };
 
 const updateProduct = (req, res) => {

@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/products", productRoutes);
+app.use("/api/products", productRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);

@@ -35,8 +35,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["USER", "ADMIN", "MERCHANT"],
     default: "USER",
+    enum: ["USER", "ADMIN", "MERCHANT"],
   },
   address: {
     street: {
@@ -55,9 +55,26 @@ const userSchema = new mongoose.Schema({
       required: [true, "Province is required"],
     },
   },
+  phone: {
+    type: String,
+    required: [true, "User phone number is required"],
+    unique: true,
+    validate: {
+      validator: (value) => {
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+
+        return phoneRegex.test(value);
+      },
+      message: "Please enter a valid phone number",
+    },
+  },
+  profileImageUrl: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
+    immutable: true,
   },
 });
 

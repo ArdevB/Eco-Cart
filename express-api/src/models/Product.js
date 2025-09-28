@@ -31,12 +31,10 @@ const productSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "Product description is required"],
   },
   size: {
     type: String,
     enum: ["S", "M", "L", "XL", "XXL"],
-    required: [true, "Product size is required"],
   },
   imageUrls: {
     type: [String],

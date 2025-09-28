@@ -3,6 +3,7 @@ import express from "express";
 
 import config from "./config/config.js";
 import productRoutes from "./routes/productRoute.js";
+import userRoutes from "./routes/userRoute.js";
 import connectDB from "./config/database.js";
 
 const app = express();
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server is running on port ${config.port}`);

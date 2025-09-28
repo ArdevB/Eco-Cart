@@ -1,0 +1,47 @@
+[{
+  "_id": {
+    "$oid": "68d8ad8141dfa1f9ce46c479"
+  },
+  "name": "Acer Aspire 3",
+  "price": 699,
+  "brand": "Acer",
+  "category": "Laptops",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d8ae3641dfa1f9ce46c47b"
+  },
+  "name": "Acer Nitor V16",
+  "price": 699,
+  "brand": "Acer",
+  "category": "Laptops",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d8aed5e5c4fcb20140cc83"
+  },
+  "name": "iPhone 17 Pro Max",
+  "price": 1299,
+  "brand": "Apple",
+  "category": "Smartphones",
+  "createdAt": {
+    "$date": "2025-09-28T03:43:17.822Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68d8cefa9d411e65e8907be5"
+  },
+  "name": "iPhone 15",
+  "price": 599,
+  "brand": "Apple",
+  "category": "Smartphones",
+  "stock": 5,
+  "createdAt": {
+    "$date": "2025-09-28T06:00:26.488Z"
+  },
+  "__v": 0
+}]

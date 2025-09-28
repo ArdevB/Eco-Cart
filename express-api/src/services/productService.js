@@ -1,24 +1,40 @@
 import fs from "fs";
+import Product from "../models/Product.js";
 
-const rawData = fs.readFileSync("./src/data/products.json", "utf-8");
+const getProducts = async (query) => {
+  const products = await Product.find();
 
-const products = JSON.parse(rawData);
-const getProducts = (query) => {
-  const filteredProducts = products.filter(
-    (product) => product.brand == query.brand
-  );
-  return filteredProducts;
+  return products;
 };
 
-const getProductById = (id) => {
-  const productFound = products.find((product) => product.id == id);
-  return productFound;
+const getProductById = async (id) => {
+  const product = await Product.findById(id);
+
+  return product;
 };
 
-const createProduct = (data) => {
-  products.push(data);
+const createProduct = async (data) => {
+  const createdProduct = await Product.create(data);
 
-  fs.writeFileSync("./src/data/products.json", JSON.stringify(products));
+  return createdProduct;
 };
 
-export default { getProducts, getProductById, createProduct };
+const updateProduct = async (id, data) => {
+  const updatedProduct = await Product.findByIdAndUpdate(id, data, {
+    new: true,
+  });
+
+  return updatedProduct;
+};
+
+const deleteProduct = async (id) => {
+  const deletedProduct = await Product.findByIdAndDelete(id);
+};
+
+export default {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};

@@ -5,6 +5,7 @@ import config from "./config/config.js";
 import productRoutes from "./routes/productRoute.js";
 import userRoutes from "./routes/userRoute.js";
 import connectDB from "./config/database.js";
+import authRoutes from "./routes/authRoute.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 

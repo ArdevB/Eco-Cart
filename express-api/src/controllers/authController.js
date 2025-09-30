@@ -1,4 +1,6 @@
 import authService from "../services/authService.js";
+import jwt from "jsonwebtoken";
+import { generateJWT, verifyJWT } from "../utils/jwt.js";
 
 const login = async (req, res) => {
   const input = req.body;
@@ -16,6 +18,10 @@ const login = async (req, res) => {
     }
 
     const data = await authService.login(input);
+
+    const token = generateJWT(data);
+
+    const result = await verifyJWT(token);
 
     res.status(200).json(data);
   } catch (error) {

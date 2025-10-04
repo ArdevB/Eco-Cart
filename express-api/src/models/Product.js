@@ -40,8 +40,10 @@ const productSchema = new mongoose.Schema({
     type: [String],
   },
   createdBy: {
-    type: [String],
-  }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "Product creator is required"],
+  },
 });
 
 const model = mongoose.model("Product", productSchema);

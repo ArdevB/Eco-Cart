@@ -10,6 +10,13 @@ const getProducts = async (query) => {
 const getProductById = async (id) => {
   const product = await Product.findById(id);
 
+  if (!product) {
+    throw {
+      statusCode: 404,
+      message: "Product not found.",
+    };
+  }
+
   return product;
 };
 
@@ -22,7 +29,16 @@ const createProduct = async (data, createdBy) => {
   return createdProduct;
 };
 
-const updateProduct = async (id, data) => {
+const updateProduct = async (id, data, userId) => {
+  const product = await getProductById(id);
+
+  if (product.createdBy != userId) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+
   const updatedProduct = await Product.findByIdAndUpdate(id, data, {
     new: true,
   });
@@ -30,7 +46,16 @@ const updateProduct = async (id, data) => {
   return updatedProduct;
 };
 
-const deleteProduct = async (id) => {
+const deleteProduct = async (id, userId) => {
+  const product = await getProductById(id);
+
+  if (product.createdBy != userId) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+
   const deletedProduct = await Product.findByIdAndDelete(id);
 };
 

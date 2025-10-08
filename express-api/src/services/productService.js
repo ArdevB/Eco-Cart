@@ -2,7 +2,7 @@ import fs from "fs";
 import Product from "../models/Product.js";
 
 const getProducts = async (query) => {
-  const { brands, category, min, max, limit, offset } = query;
+  const { name, brands, category, min, max, limit, offset } = query;
 
   const sort = JSON.parse(query.sort || "{}");
   const filters = {};
@@ -10,7 +10,8 @@ const getProducts = async (query) => {
   if (brands) filters.brand = { $in: brands.split(",") };
   if (category) filters.category = category;
   if (min) filters.price = { $gte: min };
-  if (max) filters.price = { $lte: max };
+  if (max) filters.price = { ...filters.price, $lte: max };
+  if (name) filters.name = { $regex: name, $options: "i" };
 
   const products = await Product.find(filters)
     .sort(sort)

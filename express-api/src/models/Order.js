@@ -1,4 +1,14 @@
 import mongoose from "mongoose";
+import {
+  ORDER_STATUS_PENDING,
+  ORDER_STATUS_PROCESSING,
+  ORDER_STATUS_COMPLETED,
+  ORDER_STATUS_SHIPPED,
+  ORDER_STATUS_CANCELLED,
+  ORDER_STATUS_DELIVERED,
+  ORDER_STATUS_RETURNED,
+  ORDER_STATUS_CONFIRMED,
+} from "../constants/orderStatuses.js";
 
 const orderSchema = new mongoose.Schema({
   orderNumber: {
@@ -6,14 +16,14 @@ const orderSchema = new mongoose.Schema({
     required: [true, "Order tracking number is required"],
     unique: true,
   },
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: [true, "User is required"],
   },
   orderItems: [
     {
-      productId: {
+      product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product",
         required: [true, "Product id is required"],
@@ -26,8 +36,17 @@ const orderSchema = new mongoose.Schema({
   ],
   status: {
     type: String,
-    default: "",
-    enum: [],
+    default: ORDER_STATUS_PENDING,
+    enum: [
+      ORDER_STATUS_PENDING,
+      ORDER_STATUS_PROCESSING,
+      ORDER_STATUS_CONFIRMED,
+      ORDER_STATUS_COMPLETED,
+      ORDER_STATUS_SHIPPED,
+      ORDER_STATUS_CANCELLED,
+      ORDER_STATUS_DELIVERED,
+      ORDER_STATUS_RETURNED,
+    ],
   },
   totalPrice: {
     type: Number,

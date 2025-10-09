@@ -26,4 +26,14 @@ const createOrder = async (req, res) => {
   }
 };
 
-export default { getOrders, createOrder };
+const deleteOrder = async (req, res) => {
+  try {
+    await orderService.deleteOrder(req.params.id);
+
+    res.send("Order deleted successfully.");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export default { getOrders, createOrder, deleteOrder };

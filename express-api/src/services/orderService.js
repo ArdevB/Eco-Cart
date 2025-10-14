@@ -1,5 +1,5 @@
-import { get } from "mongoose";
 import Order from "../models/Order.js";
+import payment from "../utils/payment.js";
 
 const getOrders = async () => {
   const orders = await Order.find()
@@ -45,8 +45,15 @@ const updateOrder = async (id, data) => {
 
 const deleteOrder = async (id) => await Order.findByIdAndDelete(id);
 
-const orderPayment = async (id, data) => {
+const orderPayment = async (id) => {
   const order = await getOrdersById(id);
+
+  return await payment.payViaKhalti({
+    amount: order.totalPrice,
+    purchaseOrderId: order.id,
+    purchaseOrderName: order.orderNumber,
+    customer: order.user,
+  });
 
   return order;
 };

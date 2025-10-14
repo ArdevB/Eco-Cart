@@ -45,6 +45,12 @@ const updateOrder = async (id, data) => {
 
 const deleteOrder = async (id) => await Order.findByIdAndDelete(id);
 
+const orderPayment = async (id, data) => {
+  const order = await getOrdersById(id);
+
+  return order;
+};
+
 export default {
   getOrders,
   createOrder,
@@ -52,4 +58,5 @@ export default {
   getOrdersByUser,
   getOrdersById,
   updateOrder,
+  orderPayment,
 };

@@ -69,6 +69,10 @@ const orderSchema = new mongoose.Schema({
       required: [true, "Province is required"],
     },
   },
+  payment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Payment",
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

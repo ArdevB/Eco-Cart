@@ -1,5 +1,12 @@
+import { ORDER_STATUS_CONFIRMED } from "../constants/orderStatuses.js";
+import {
+  PAYMENT_STATUS_COMPLETED,
+  PAYMENT_STATUS_FAILED,
+} from "../constants/paymentStatuses.js";
 import Order from "../models/Order.js";
+import Payment from "../models/Payment.js";
 import payment from "../utils/payment.js";
+import crypto from "crypto";
 
 const getOrders = async () => {
   const orders = await Order.find()
@@ -12,7 +19,8 @@ const getOrders = async () => {
 const getOrdersByUser = async (userId) => {
   const orders = await Order.find({ user: userId })
     .populate("orderItems.product")
-    .populate("user", ["name", "email", "phone", "address"]);
+    .populate("user", ["name", "email", "phone", "address"])
+    .populate("payment");
 
   return orders;
 };
@@ -20,7 +28,8 @@ const getOrdersByUser = async (userId) => {
 const getOrdersById = async (id) => {
   const orders = await Order.findById(id)
     .populate("orderItems.product")
-    .populate("user", ["name", "email", "phone", "address"]);
+    .populate("user", ["name", "email", "phone", "address"])
+    .populate("payment");
 
   if (!orders) throw { statusCode: 404, message: "Order not found." };
 
@@ -48,14 +57,51 @@ const deleteOrder = async (id) => await Order.findByIdAndDelete(id);
 const orderPayment = async (id) => {
   const order = await getOrdersById(id);
 
+  const transactionId = crypto.randomUUID();
+
+  const payment = await Payment.create({
+    amount: order.totalPrice,
+    method: "online payment",
+    transactionId,
+  });
+
+  await Order.findByIdAndUpdate(id, {
+    payment: payment._id,
+  });
+
   return await payment.payViaKhalti({
     amount: order.totalPrice,
     purchaseOrderId: order.id,
     purchaseOrderName: order.orderNumber,
     customer: order.user,
   });
+};
 
-  return order;
+const confirmOrderPayment = async (id, status) => {
+  const order = await getOrdersById(id);
+
+  if (status.toUpperCase() != PAYMENT_STATUS_COMPLETED) {
+    await Payment.findByIdAndUpdate(id, {
+      status: PAYMENT_STATUS_FAILED,
+    });
+
+    throw {
+      statusCode: 400,
+      message: "Payment failed.",
+    };
+  }
+
+  await Payment.findByIdAndUpdate(order.payment._id, {
+    status: PAYMENT_STATUS_COMPLETED,
+  });
+
+  return await Order.findByIdAndUpdate(
+    id,
+    {
+      status: ORDER_STATUS_CONFIRMED,
+    },
+    { new: true }
+  );
 };
 
 export default {
@@ -66,4 +112,5 @@ export default {
   getOrdersById,
   updateOrder,
   orderPayment,
+  confirmOrderPayment,
 };

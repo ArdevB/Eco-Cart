@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+import {
+  PAYMENT_STATUS_PENDING,
+  PAYMENT_STATUS_COMPLETED,
+  PAYMENT_STATUS_FAILED,
+} from "../constants/paymentStatuses.js";
 
-new mongoose.Schema({
+const paymentSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: [true, "Amount is required"],
@@ -12,8 +17,12 @@ new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "pending",
-    enum: ["pending", "completed", "failed"],
+    default: PAYMENT_STATUS_PENDING,
+    enum: [
+      PAYMENT_STATUS_COMPLETED,
+      PAYMENT_STATUS_FAILED,
+      PAYMENT_STATUS_PENDING,
+    ],
   },
   createdAt: {
     type: Date,

@@ -63,20 +63,21 @@ const forgotPassword = async (email) => {
   await sentEmail(email, {
     subject: "Reset Password",
     body: `<div>
-      <h1>Please click the link below to reset your password</h1>
-      <a
-        href="${config.appUrl}/reset-password?token=${token}&userId=${user._id}"
-        style="
-          padding: 5px 15px;
-          background-color: lightblue;
-          color: black;
-          text-decoration: none;
-        "
-        >Reset Password
-      </a>
-    </div>
-`,
+        <h1>Please click the link below to reset your password</h1>
+        <a
+          href="${config.appUrl}/reset-password?token=${token}&userId=${user._id}"
+          style="
+            padding: 5px 15px;
+            background-color: lightblue;
+            color: black;
+            text-decoration: none;
+          "
+          >Reset Password
+        </a>
+      </div>
+  `,
   });
+
   //Send email
   // /reset-password?token=<token>&userId=<userId>
 

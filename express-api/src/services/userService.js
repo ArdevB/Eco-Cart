@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import uploadFile from  "../utils/file.js";
+import uploadFile from "../utils/file.js";
 
 const createUser = async (data) => await User.create(data);
 
@@ -9,10 +9,35 @@ const getUsers = async () => {
   return users;
 };
 
-const getUserById = async (id) => await User.findById(id);
+const getUserById = async (id) => {
+  const user = await User.findById(id);
 
-const updateUser = async (id, data) => {
-  const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
+  if (!user) {
+    throw {
+      statusCode: 404,
+      message: "User not found.",
+    };
+  }
+};
+
+const updateUser = async (id, data, authUser) => {
+  const user = await getUserById(id);
+
+  if (user.id != user.id && !authUser.roles.includes(ADMIN)) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+  const updatedUser = await User.findByIdAndUpdate(
+    id,
+    {
+      name: data.name,
+      phone: data.phone,
+      address: data.address,
+    },
+    { new: true }
+  );
 
   return updatedUser;
 };
@@ -21,8 +46,18 @@ const deleteUser = async (id) => {
   const updatedUser = await User.findByIdAndDelete(id);
 };
 
-const updateProfileImage = async (id, file) => {
+const updateProfileImage = async (id, file, authUser) => {
+  const user = await getUserById(id);
+
+  if (user.id != user.id && !authUser.roles.includes(ADMIN)) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+
   const uploadedFile = await uploadFile([file]);
+
   const updatedUser = await User.findByIdAndUpdate(
     id,
     { profileImageUrl: uploadedFile[0]?.url },

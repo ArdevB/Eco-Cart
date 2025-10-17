@@ -1,3 +1,4 @@
+import { ADMIN } from "../constants/roles.js";
 import productService from "../services/productService.js";
 const getProducts = async (req, res) => {
   //Request Query
@@ -36,7 +37,7 @@ const updateProduct = async (req, res) => {
       id,
       req.body,
       req.files,
-      req.user._id
+      req.user
     );
 
     res.status(201).json(data);
@@ -47,9 +48,10 @@ const updateProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   const id = req.params.id;
+  const user = req.user;
 
   try {
-    const data = await productService.deleteProduct(id, req.user._id);
+    await productService.deleteProduct(id, user);
 
     res.send(`Product deleted successfully with id: ${id}`);
   } catch (error) {

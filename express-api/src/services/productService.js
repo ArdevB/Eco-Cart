@@ -1,6 +1,6 @@
-import fs from "fs";
 import Product from "../models/Product.js";
 import uploadFile from "../utils/file.js";
+import { ADMIN } from "../constants/roles.js";
 
 const getProducts = async (query) => {
   const { name, brands, category, min, max, limit, offset } = query;
@@ -47,10 +47,10 @@ const createProduct = async (data, files, createdBy) => {
   return createdProduct;
 };
 
-const updateProduct = async (id, data, files, userId) => {
+const updateProduct = async (id, data, files, user) => {
   const product = await getProductById(id);
 
-  if (product.createdBy != userId) {
+  if (product.createdBy != user.id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
@@ -71,17 +71,17 @@ const updateProduct = async (id, data, files, userId) => {
   return updatedProduct;
 };
 
-const deleteProduct = async (id, userId) => {
+const deleteProduct = async (id, user) => {
   const product = await getProductById(id);
 
-  if (product.createdBy != userId) {
+  if (product.createdBy != user.id && !req.user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
     };
   }
 
-  const deletedProduct = await Product.findByIdAndDelete(id);
+  await Product.findByIdAndDelete(id);
 };
 
 export default {

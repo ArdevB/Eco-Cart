@@ -30,7 +30,7 @@ const getUserById = async (req, res) => {
 const updateUser = async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await userService.updateUser(id, req.body);
+    const data = await userService.updateUser(id, req.body, req.user);
 
     res.status(200).json(data);
   } catch (error) {
@@ -52,7 +52,7 @@ const updateProfileImage = async (req, res) => {
   const id = req.params.id;
   const file = req.file;
   try {
-    const data = await userService.updateProfileImage(id, file);
+    const data = await userService.updateProfileImage(id, file, req.user);
 
     res.json(data);
   } catch (error) {

@@ -32,6 +32,13 @@ const getProductById = async (id) => {
     };
   }
 
+  if (product.stock < 1) {
+    throw {
+      statusCode: 404,
+      message: "Product not available in stock.",
+    };
+  }
+
   return product;
 };
 

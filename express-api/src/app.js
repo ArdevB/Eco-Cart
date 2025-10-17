@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", upload.array("images", 5), productRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/orders", auth, orderRoutes);
 app.use("/api/users", auth, upload.single("image"), userRoutes);
 
 app.listen(config.port, () => {

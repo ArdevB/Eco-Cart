@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
 
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 
@@ -17,13 +17,14 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const id = req.params.id;
   try {
+    const id = req.params.id;
+
     const data = await userService.getUserById(id);
 
     res.status(200).json(data);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 
@@ -34,7 +35,7 @@ const updateUser = async (req, res) => {
 
     res.status(200).json(data);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 
@@ -44,7 +45,7 @@ const deleteUser = async (req, res) => {
     const data = await userService.deleteUser(id);
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 
@@ -56,7 +57,7 @@ const updateProfileImage = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 

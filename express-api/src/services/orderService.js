@@ -43,6 +43,15 @@ const createOrder = async (data, userId) => {
 };
 
 const updateOrder = async (id, data) => {
+  const order = await getProductById(id);
+
+  if (order.user.id != user.id && !user.roles.includes(ADMIN)) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+
   return await Order.findByIdAndUpdate(
     id,
     {
@@ -52,10 +61,28 @@ const updateOrder = async (id, data) => {
   );
 };
 
-const deleteOrder = async (id) => await Order.findByIdAndDelete(id);
+const deleteOrder = async (id, user) => {
+  const order = await getProductById(id);
 
-const orderPaymentViaKhalti = async (id) => {
+  if (order.user.id != user.id && !user.roles.includes(ADMIN)) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
+
+  await Order.findByIdAndDelete(id);
+};
+
+const orderPaymentViaKhalti = async (id, user) => {
   const order = await getOrdersById(id);
+
+  if (order.user.id != user.id) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
 
   const transactionId = crypto.randomUUID();
 
@@ -77,8 +104,15 @@ const orderPaymentViaKhalti = async (id) => {
   });
 };
 
-const confirmOrderPayment = async (id, status) => {
+const confirmOrderPayment = async (id, status, user) => {
   const order = await getOrdersById(id);
+
+  if (order.user.id != user.id) {
+    throw {
+      statusCode: 403,
+      message: "Access denied.",
+    };
+  }
 
   if (status.toUpperCase() != PAYMENT_STATUS_COMPLETED) {
     await Payment.findByIdAndUpdate(id, {

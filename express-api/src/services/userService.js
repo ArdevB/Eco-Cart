@@ -23,7 +23,7 @@ const getUserById = async (id) => {
 const updateUser = async (id, data, authUser) => {
   const user = await getUserById(id);
 
-  if (user.id != user.id && !authUser.roles.includes(ADMIN)) {
+  if (user._id != user._id && !authUser.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
@@ -49,7 +49,7 @@ const deleteUser = async (id) => {
 const updateProfileImage = async (id, file, authUser) => {
   const user = await getUserById(id);
 
-  if (user.id != user.id && !authUser.roles.includes(ADMIN)) {
+  if (user._id != user._id && !authUser.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",

@@ -57,7 +57,7 @@ const createProduct = async (data, files, createdBy) => {
 const updateProduct = async (id, data, files, user) => {
   const product = await getProductById(id);
 
-  if (product.createdBy != user.id && !user.roles.includes(ADMIN)) {
+  if (product.createdBy != user._id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
@@ -81,7 +81,7 @@ const updateProduct = async (id, data, files, user) => {
 const deleteProduct = async (id, user) => {
   const product = await getProductById(id);
 
-  if (product.createdBy != user.id && !req.user.roles.includes(ADMIN)) {
+  if (product.createdBy != user._id && !req.user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",

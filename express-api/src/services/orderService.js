@@ -26,14 +26,18 @@ const getOrdersByUser = async (userId) => {
 };
 
 const getOrdersById = async (id) => {
-  const orders = await Order.findById(id)
+  const order = await Order.findById(id)
     .populate("orderItems.product")
     .populate("user", ["name", "email", "phone", "address"])
     .populate("payment");
 
-  if (!orders) throw { statusCode: 404, message: "Order not found." };
-
-  return orders;
+  if (!order) {
+    throw {
+      statusCode: 404,
+      message: "Order not found.",
+    };
+  }
+  return order;
 };
 
 const createOrder = async (data, userId) => {
@@ -45,7 +49,7 @@ const createOrder = async (data, userId) => {
 const updateOrder = async (id, data) => {
   const order = await getProductById(id);
 
-  if (order.user.id != user.id && !user.roles.includes(ADMIN)) {
+  if (order.user._id != user._id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
@@ -62,22 +66,20 @@ const updateOrder = async (id, data) => {
 };
 
 const deleteOrder = async (id, user) => {
-  const order = await getProductById(id);
-
-  if (order.user.id != user.id && !user.roles.includes(ADMIN)) {
+  const order = await getOrdersById(id);
+  if (order.user._id != user._id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
     };
   }
-
-  await Order.findByIdAndDelete(id);
+  return await Order.findByIdAndDelete(id);
 };
 
 const orderPaymentViaKhalti = async (id, user) => {
   const order = await getOrdersById(id);
 
-  if (order.user.id != user.id) {
+  if (order.user._id != user._id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",
@@ -86,14 +88,14 @@ const orderPaymentViaKhalti = async (id, user) => {
 
   const transactionId = crypto.randomUUID();
 
-  const payment = await Payment.create({
+  const orderPayment = await Payment.create({
     amount: order.totalPrice,
     method: "online payment",
     transactionId,
   });
 
   await Order.findByIdAndUpdate(id, {
-    payment: payment._id,
+    payment: orderPayment._id,
   });
 
   return await payment.payViaKhalti({
@@ -107,7 +109,7 @@ const orderPaymentViaKhalti = async (id, user) => {
 const confirmOrderPayment = async (id, status, user) => {
   const order = await getOrdersById(id);
 
-  if (order.user.id != user.id) {
+  if (order.user._id != user._id && !user.roles.includes(ADMIN)) {
     throw {
       statusCode: 403,
       message: "Access denied.",

@@ -1,6 +1,8 @@
 import Product from "../models/Product.js";
 import uploadFile from "../utils/file.js";
 import { ADMIN } from "../constants/roles.js";
+import promptGemini from "../utils/gemini.js";
+import { PRODUCT_DESCRIPTION_PROMPT } from "../constants/prompt.js";
 
 const getProducts = async (query) => {
   const { name, brands, category, min, max, limit, offset } = query;
@@ -45,10 +47,18 @@ const getProductById = async (id) => {
 const createProduct = async (data, files, createdBy) => {
   const uploadedFiles = await uploadFile(files);
 
+  const promptMessage = PRODUCT_DESCRIPTION_PROMPT.replace("%s", data.brand)
+    .replace("%s", data.name)
+    .replace("%s", data.price)
+    .replace("%s", data.category);
+
+  const aiDescription = await promptGemini(promptMessage);
+
   const createdProduct = await Product.create({
     ...data,
     createdBy: createdBy,
     imageUrls: uploadedFiles.map((item) => item?.url),
+    description: data.description ?? aiDescription,
   });
 
   return createdProduct;

@@ -27,6 +27,10 @@ const config = {
     authToken: process.env.TWILIO_AUTH_TOKEN || "",
     phoneNumber: process.env.TWILIO_PHONE_NUMBER || "",
   },
+  gemini: {
+    url: process.env.GEMINI_URL || "",
+    apiKey: process.env.GEMINI_API_KEY || "",
+  },
 };
 
 export default config;

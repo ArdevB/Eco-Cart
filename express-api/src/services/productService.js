@@ -5,7 +5,7 @@ import promptGemini from "../utils/gemini.js";
 import { PRODUCT_DESCRIPTION_PROMPT } from "../constants/prompt.js";
 
 const getProducts = async (query) => {
-  const { name, brands, category, min, max, limit, offset } = query;
+  const { name, brands, category, min, max, limit, offset, createdBy } = query;
 
   const sort = JSON.parse(query.sort || "{}");
   const filters = {};
@@ -15,6 +15,8 @@ const getProducts = async (query) => {
   if (min) filters.price = { $gte: min };
   if (max) filters.price = { ...filters.price, $lte: max };
   if (name) filters.name = { $regex: name, $options: "i" };
+
+  if (createdBy) filters.createdBy = createdBy;
 
   const products = await Product.find(filters)
     .sort(sort)
@@ -52,13 +54,13 @@ const createProduct = async (data, files, createdBy) => {
     .replace("%s", data.price)
     .replace("%s", data.category);
 
-  const aiDescription = await promptGemini(promptMessage);
+  const description = data.description ?? (await promptGemini(promptMessage));
 
   const createdProduct = await Product.create({
     ...data,
     createdBy: createdBy,
     imageUrls: uploadedFiles.map((item) => item?.url),
-    description: data.description ?? aiDescription,
+    description,
   });
 
   return createdProduct;
@@ -76,7 +78,7 @@ const updateProduct = async (id, data, files, user) => {
 
   const updateData = data;
 
-  if (files.length > 0) {
+  if (files && files.length > 0) {
     const uploadedFiles = await uploadFile(files);
     updateData.imageUrls = uploadedFiles.map((item) => item?.url);
   }

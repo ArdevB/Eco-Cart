@@ -1,3 +1,4 @@
+import { MERCHANT, USER } from "../constants/roles.js";
 import User from "../models/User.js";
 import uploadFile from "../utils/file.js";
 
@@ -67,6 +68,18 @@ const updateProfileImage = async (id, file, authUser) => {
   return updatedUser;
 };
 
+const createMerchant = async (userId) => {
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      role: [USER, MERCHANT],
+    },
+    { new: true }
+  );
+
+  return updatedUser;
+};
+
 export default {
   createUser,
   getUsers,
@@ -74,4 +87,5 @@ export default {
   updateUser,
   deleteUser,
   updateProfileImage,
+  createMerchant,
 };

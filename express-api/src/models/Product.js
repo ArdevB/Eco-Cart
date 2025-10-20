@@ -44,7 +44,6 @@ const productSchema = new mongoose.Schema({
     ref: "User",
     required: [true, "Product creator is required"],
   },
-  description: String,
 });
 
 const model = mongoose.model("Product", productSchema);

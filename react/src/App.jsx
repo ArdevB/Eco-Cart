@@ -20,8 +20,11 @@ function App() {
     },
     [count], // dependencies (state variables) that trigger the effect when they change
   );
+  
   return (
     <div>
+      <ProductsTable />
+
       <span>Count: {count}</span>
 
       <ComponentA />
@@ -34,8 +37,6 @@ function App() {
 
       <Card title="iPhone 14 Pro" price={999} brand="Apple" />
       <Card title="Samsung Galaxy S23" price={899} brand="Samsung" />
-
-      <ProductsTable />
     </div>
   );
 }

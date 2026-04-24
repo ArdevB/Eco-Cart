@@ -1,9 +1,36 @@
+import { useEffect, useState } from "react";
+
 const ProductsTable = () => {
-  fetch("https://eco-cart-chi.vercel.app/api/products")
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
-  return <div>ProductsTable</div>;
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://eco-cart-chi.vercel.app/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  if (products.length == 0) return <div>Loading...</div>;
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th> <th>Brand</th> <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product, index) => (
+            <tr key={index}>
+              <td>{product.name}</td>
+              <td>{product.brand}</td>
+              <td>{product.price}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default ProductsTable;

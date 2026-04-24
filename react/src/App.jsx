@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import ComponentA from "./components/componentA";
+import ProductsTable from "./components/ProductsTable";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,6 +34,8 @@ function App() {
 
       <Card title="iPhone 14 Pro" price={999} brand="Apple" />
       <Card title="Samsung Galaxy S23" price={899} brand="Samsung" />
+
+      <ProductsTable />
     </div>
   );
 }

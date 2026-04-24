@@ -24,7 +24,7 @@ connectCloudinary();
 
 app.use(
   cors({
-    origin: "https://eco-cart-chi.vercel.app/",
+    origin: "https://eco-cart-chi.vercel.app",
     credentials: true,
   }),
 );

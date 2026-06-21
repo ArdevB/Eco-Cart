@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const ProductsTable = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const ProductsTable = () => {
       <table>
         <thead>
           <tr>
-            <th>Name</th> <th>Brand</th> <th>Price</th>
+            <th>Name</th> <th>Brand</th> <th>Price</th> <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +26,9 @@ const ProductsTable = () => {
               <td>{product.name}</td>
               <td>{product.brand}</td>
               <td>{product.price}</td>
+              <td>
+                <Link to={`/products/${product._id}`}>View Details</Link>
+              </td>
             </tr>
           ))}
         </tbody>

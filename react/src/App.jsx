@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Card from "./Card";
 import ComponentA from "./components/componentA";
 import ProductsTable from "./components/ProductsTable";
+import Header from "./components/Header";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,7 +21,7 @@ function App() {
     },
     [count], // dependencies (state variables) that trigger the effect when they change
   );
-  
+
   return (
     <div>
       <ProductsTable />

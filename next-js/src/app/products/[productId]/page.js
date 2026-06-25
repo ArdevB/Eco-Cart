@@ -1,8 +1,13 @@
 const ProductDetails = async ({ params }) => {
   const productId = (await params).productId;
+
   const product = await fetch(
     `https://eco-cart-chi.vercel.app/api/products/${productId}`,
-  ).then((res) => res?.json());
+  )
+    .then((res) => res?.json())
+    .catch((error) => {
+      throw new Error("Product not found");
+    });
 
   return (
     <div>

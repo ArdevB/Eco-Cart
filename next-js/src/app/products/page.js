@@ -4,7 +4,7 @@ const Products = async ({ searchParams }) => {
   const query = await searchParams;
 
   const products = await fetch(
-    "https://eco-cart-chi.vercel.app/api/products",
+    "https://eco-cart-chi.vercel.app/api/products"
   ).then((res) => res.json());
 
   return (

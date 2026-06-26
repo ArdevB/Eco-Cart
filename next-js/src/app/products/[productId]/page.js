@@ -1,5 +1,6 @@
-const ProductDetails = async ({ params }) => {
+const ProductDetails = async ({ params, searchParams }) => {
   const productId = (await params).productId;
+  const query = await searchParams;
 
   const product = await fetch(
     `https://eco-cart-chi.vercel.app/api/products/${productId}`,

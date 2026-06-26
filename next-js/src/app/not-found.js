@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const NotFoundPage = () => {
   return (
@@ -7,9 +8,9 @@ const NotFoundPage = () => {
         4 <span className="text-red-500 text-9xl">0</span> 4
       </h2>
       <h1 className="font-bold text-4xl">Page Not Found</h1>
-      <a href="/" className="mt-4 text-blue-500 hover:underline">
+      <Link href="/" className="mt-4 text-blue-500 hover:underline">
         Go Back to Home
-      </a>
+      </Link>
     </div>
   );
 };

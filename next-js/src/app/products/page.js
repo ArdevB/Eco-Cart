@@ -1,6 +1,8 @@
 import ProductCard from "./_components/Card";
 
-const Products = async () => {
+const Products = async ({ searchParams }) => {
+  const query = await searchParams;
+
   const products = await fetch(
     "https://eco-cart-chi.vercel.app/api/products",
   ).then((res) => res.json());
